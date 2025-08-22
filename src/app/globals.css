@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light glass gradient background */
+  --app-bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+
+  /* Brand colors */
+  --color-primary: #3b82f6;
+  --color-secondary: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+
+  /* Neutrals */
+  --color-text: #1e293b;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+
+  /* Shadows */
+  --shadow-card: 8px 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-card-inset-top: inset 1px 1px 2px rgba(255, 255, 255, 0.6);
+  --shadow-card-inset-bottom: inset -1px -1px 2px rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] {
+  --app-bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  --color-text: #f1f5f9;
+  --color-text-muted: #94a3b8;
+  --color-border: #334155;
+  --shadow-card: 8px 8px 24px rgba(0, 0, 0, 0.3);
+  --shadow-card-inset-top: inset 1px 1px 2px rgba(255, 255, 255, 0.1);
+  --shadow-card-inset-bottom: inset -1px -1px 2px rgba(0, 0, 0, 0.2);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--app-bg-gradient);
+  --color-foreground: var(--color-text);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html, body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--app-bg-gradient);
+  color: var(--color-text);
+}
+
+/* Glass card utility */
+.card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: var(--shadow-card-inset-top), var(--shadow-card-inset-bottom), var(--shadow-card);
+  transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] .card {
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card-inset-top), var(--shadow-card-inset-bottom), 12px 12px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-1px);
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.btn-primary:hover {
+  box-shadow: 0 6px 10px rgba(59, 130, 246, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Inputs inherit glass look with smaller radius */
+.input {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.6), inset -1px -1px 2px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1), border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] .input {
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+.input:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.7), inset -1px -1px 2px rgba(0, 0, 0, 0.06), 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+/* Micro animations */
+.fade-in {
+  animation: fadeIn 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
