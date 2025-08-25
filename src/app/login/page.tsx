@@ -13,7 +13,7 @@ import { TextPlugin } from 'gsap/TextPlugin';
 gsap.registerPlugin(useGSAP, TextPlugin);
 
 const schema = z.object({
-  email: z.string().email("Некорректный email"),
+  email: z.email("Некорректный email"),
   password: z.string().min(6, "Пароль должен содержать минимум 6 символов"),
 });
 
@@ -160,7 +160,7 @@ export default function LoginPage() {
           </button>
         </form>
         
-        {hasGitHub && (
+
           <div className="social-section mt-6">
             <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
@@ -182,7 +182,7 @@ export default function LoginPage() {
               Войти через GitHub
             </button>
           </div>
-        )}
+
         
         <div className="home-link mt-6 text-center">
           <Link 
