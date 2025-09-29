@@ -23,7 +23,7 @@ export const config: NeatConfig = {
             enabled: true,
         },
     ],
-    speed: 3,
+    speed: 1,
     horizontalPressure: 5,
     verticalPressure: 7,
     waveFrequencyX: 6,
